@@ -18,7 +18,7 @@ namespace YeelightCMD
         // 组播端口
         private static int MULTICAST_PORT = 1982;
         // 组播地址对象
-        private static IPEndPoint multicast = new IPEndPoint(IPAddress.Parse(MULTICAST_HOST), MULTICAST_PORT);
+        private static IPEndPoint MULTICAST_IP_END_POINT = new IPEndPoint(IPAddress.Parse(MULTICAST_HOST), MULTICAST_PORT);
         // 搜索设备广播内容
         private static string SEARCH_DEVICE_MULTCAST_CONTENT = "M-SEARCH * HTTP/1.1\r\nHOST:239.255.255.250:1982\r\nMAN:\"ssdp:discover\"\r\nST:wifi_bulb\r\n";
         // 地址正则
@@ -81,9 +81,9 @@ namespace YeelightCMD
                 // 将组播内容转为byte
                 byte[] contentBuf = Encoding.Default.GetBytes(SEARCH_DEVICE_MULTCAST_CONTENT);
                 // 发送组播
-                client.Send(contentBuf, contentBuf.Length, multicast);
+                client.Send(contentBuf, contentBuf.Length, MULTICAST_IP_END_POINT);
                 // 接收回应
-                byte[] resBuf = client.Receive(ref multicast);
+                byte[] resBuf = client.Receive(ref MULTICAST_IP_END_POINT);
                 // 处理回应数据
                 string resStr = Encoding.Default.GetString(resBuf);
 
