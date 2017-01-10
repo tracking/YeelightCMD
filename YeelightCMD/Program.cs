@@ -75,8 +75,6 @@ namespace YeelightCMD
             {
                 // 创建UDP客户端
                 UdpClient client = new UdpClient(new IPEndPoint(IPAddress.Parse(localIP), 0));
-                // 加到广播组
-                client.JoinMulticastGroup(IPAddress.Parse(MULTICAST_HOST));
 
                 // 将组播内容转为byte
                 byte[] contentBuf = Encoding.Default.GetBytes(SEARCH_DEVICE_MULTCAST_CONTENT);
